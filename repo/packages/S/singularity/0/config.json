@@ -1,0 +1,70 @@
+{
+  "type": "object",
+  "properties": {
+    "singularity": {
+      "description": "Singularity framework configuration properties",
+      "type": "object",
+      "properties": {
+        "framework-name": {
+          "description": "The framework name to register with Mesos.",
+          "type": "string",
+          "default": "singularity"
+        },
+        "host": {
+            "description": "The host that Singularity agents will use to connect back to the master.",
+            "type": "string",
+            "default": "$HOST"
+        },
+        "port": {
+            "description": "Singularity port.",
+            "type": "integer",
+            "default": 7099
+        },
+        "cpus": {
+            "description": "CPU shares to allocate.",
+            "type": "number",
+            "default": 1.0,
+            "minimum": 0.1
+        },
+        "mem": {
+            "description": "Memory to allocate.",
+            "type": "number",
+            "default": 1024.0,
+            "minimum": 1024.0
+        },
+        "zookeeper": {
+            "description": "Host and port of this cluster's zookeeper.",
+            "type": "string",
+            "default": "leader.mesos:2181"
+        },
+        "mesos-master": {
+            "description": "URI of this cluster's Mesos master.",
+            "type": "string",
+            "default": "zk://leader.mesos:2181/mesos"
+        },
+        "max-heap": {
+            "description": "Optional maximum heap size.",
+            "type": "string",
+            "default": "512m"
+        },
+        "role": {
+            "description": "The accepted resource roles (e.g. slave_public). By default, this will deploy to any agents with the * role.",
+            "type": "string",
+            "default": "*"
+        }
+      },
+      "required": [
+        "framework-name",
+        "host",
+        "cpus",
+        "mem",
+        "mesos-master",
+        "max-heap",
+        "role"
+      ]
+    }
+  },
+  "required": [
+    "singularity"
+  ]
+}

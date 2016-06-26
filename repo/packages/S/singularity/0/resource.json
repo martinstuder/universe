@@ -1,0 +1,9 @@
+{
+  "assets": {
+    "container": {
+      "docker": {
+        "singularity": "hubspot/singularityservice:0.8.0"
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "{{singularity.framework-name}}",
+  "cpus": {{singularity.cpus}},
+  "mem": {{singularity.mem}},
+  "instances": 1,
+  "env": {
+      "HOST_IP": "{{singularity.host}}",
+      "SINGULARITY_PORT": "{{singularity.port}}",
+      "SINGULARITY_MAX_HEAP": "{{singularity.max-heap}}",
+      "SINGULARITY_MESOS_MASTER": "{{singularity.mesos-master}}",
+      "SINGULARITY_ZK": "{{singularity.zookeeper}}",
+      "SINGULARITY_ZK_NAMESPACE": "{{singularity.framework-name}}",
+      "LOAD_BALANCER_URI": ""
+  },
+  "requirePorts": true,
+  "portDefinitions": [
+    {
+      "port": {{singularity.port}},
+      "protocol": "tcp",
+      "name: "api",
+      "labels": {}
+    }
+  ],
+  "container": {
+       "type": "DOCKER",
+       "docker": {
+           "image": "{{resource.assets.container.docker.singularity}}",
+           "network" : "HOST"
+       }
+   },
+   "acceptedResourceRoles": [ "{{singularity.role}}" ],
+   "healthChecks": [
+    {
+      "path": "/service/{{singularity.framework-name}}",
+      "portIndex": 0,
+      "protocol": "HTTP",
+      "gracePeriodSeconds": 30,
+      "intervalSeconds": 60,
+      "timeoutSeconds": 20,
+      "maxConsecutiveFailures": 3
+    }
+  ],
+  "labels": {
+    "MARATHON_SINGLE_INSTANCE_APP": "true",
+    "DCOS_PACKAGE_FRAMEWORK_NAME": "{{singularity.framework-name}}"
+  },
+  "upgradeStrategy":{
+    "minimumHealthCapacity": 0,
+    "maximumOverCapacity": 0
+  }
+}

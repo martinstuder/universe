@@ -1,0 +1,21 @@
+{
+  "packagingVersion": "2.0",
+  "name": "singularity",
+  "version": "0.1.0",
+  "scm": "https://github.com/HubSpot/Singularity",
+  "maintainer": "martin.remo.studer@gmail.com",
+  "website": "http://getsingularity.com/",
+  "framework": true,
+  "description": "Singularity is an API and web application for running and scheduling Apache Mesos tasks - including long running processes, scheduled jobs, and one-off tasks. It focuses on a batteries-included approach: Singularity and its components provide an entire Platform as a Service (PaaS) to end-users. It has many features which have been introduced to reduce developer friction and ensure proper operation and reliable deployment of tasks. Users may even be unfamiliar with and shielded from the details of Mesos.",
+  "tags": ["scheduler", "mesos", "docker"],
+  "preInstallNotes": "WARNING: Singularity on DCOS is currently in ALPHA. There may be bugs, incomplete\nfeatures, incorrect documentation, or other discrepancies.",
+  "postInstallNotes": "Singularity has been installed.",
+  "postUninstallNotes": "Singularity has been uninstalled.",
+  "licenses": [
+    {
+      "name": "Apache License Version 2.0",
+      "url": "https://github.com/HubSpot/Singularity/blob/master/LICENSE"
+    }
+  ],
+  "selected": true
+}
