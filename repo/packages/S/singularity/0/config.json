@@ -16,20 +16,10 @@
           "type": "string",
           "pattern": "^(?:\\.[a-z][a-z0-9]*?(?:-[a-z0-9]+)*)+$"
         },
-        "host": {
-            "description": "The Singularity host.",
-            "type": "string",
-            "default": "$HOST"
-        },
         "port": {
             "description": "The port on which Singularity will be available.",
             "type": "integer",
             "default": 7099
-        },
-        "ui-base": {
-            "description": "Singularity UI base.",
-            "type": "string",
-            "default": "/singularity"
         },
         "cpus": {
             "description": "CPU shares to allocate.",
@@ -67,9 +57,7 @@
       "required": [
         "framework-name",
         "dns-suffix",
-        "host",
         "port",
-        "ui-base",
         "cpus",
         "mem",
         "zookeeper",

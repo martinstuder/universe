@@ -6,11 +6,11 @@
   "env": {
       "SINGULARITY_HOSTNAME": "{{singularity.framework-name}}{{singularity.dns-suffix}}",
       "SINGULARITY_PORT": "{{singularity.port}}",
-      "SINGULARITY_UI_BASE": "{{singularity.ui-base}}",
       "SINGULARITY_MAX_HEAP": "{{singularity.max-heap}}",
       "SINGULARITY_MESOS_MASTER": "{{singularity.mesos-master}}",
       "SINGULARITY_ZK": "{{singularity.zookeeper}}",
       "SINGULARITY_ZK_NAMESPACE": "{{singularity.framework-name}}",
+      "SINGULARITY_URI_BASE": "http://m1.dcos/service/{{singularity.framework-name}}/singularity",
       "LOAD_BALANCER_URI": ""
   },
   "requirePorts": true,
@@ -31,8 +31,9 @@
    "acceptedResourceRoles": [ "{{singularity.role}}" ],
    "healthChecks": [],
   "labels": {
-    "MARATHON_SINGLE_INSTANCE_APP": "true",
-    "DCOS_PACKAGE_FRAMEWORK_NAME": "{{singularity.framework-name}}"
+    "DCOS_SERVICE_NAME": "{{singularity.framework-name}}",
+    "DCOS_SERVICE_SCHEME": "http",
+    "DCOS_SERVICE_PORT_INDEX": "0"
   },
   "upgradeStrategy": {
     "minimumHealthCapacity": 0,
