@@ -10,15 +10,26 @@
           "type": "string",
           "default": "singularity"
         },
+        "dns-suffix": {
+          "default": ".marathon.mesos",
+          "description": "This value is appended to the framework-name value to form the canonical DNS name for Singularity.",
+          "type": "string",
+          "pattern": "^(?:\\.[a-z][a-z0-9]*?(?:-[a-z0-9]+)*)+$"
+        },
         "host": {
-            "description": "The host that Singularity agents will use to connect back to the master.",
+            "description": "The Singularity host.",
             "type": "string",
             "default": "$HOST"
         },
         "port": {
-            "description": "Singularity port.",
+            "description": "The port on which Singularity will be available.",
             "type": "integer",
             "default": 7099
+        },
+        "ui-base": {
+            "description": "Singularity UI base.",
+            "type": "string",
+            "default": "/singularity"
         },
         "cpus": {
             "description": "CPU shares to allocate.",
@@ -29,8 +40,8 @@
         "mem": {
             "description": "Memory to allocate.",
             "type": "number",
-            "default": 1024.0,
-            "minimum": 1024.0
+            "default": 512.0,
+            "minimum": 512.0
         },
         "zookeeper": {
             "description": "Host and port of this cluster's zookeeper.",
@@ -55,9 +66,13 @@
       },
       "required": [
         "framework-name",
+        "dns-suffix",
         "host",
+        "port",
+        "ui-base",
         "cpus",
         "mem",
+        "zookeeper",
         "mesos-master",
         "max-heap",
         "role"
