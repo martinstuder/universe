@@ -16,11 +16,6 @@
           "type": "string",
           "pattern": "^(?:\\.[a-z][a-z0-9]*?(?:-[a-z0-9]+)*)+$"
         },
-        "port": {
-            "description": "The port on which Singularity will be available.",
-            "type": "integer",
-            "default": 7099
-        },
         "cpus": {
             "description": "CPU shares to allocate.",
             "type": "number",
@@ -47,23 +42,16 @@
             "description": "Optional maximum heap size.",
             "type": "string",
             "default": "512m"
-        },
-        "role": {
-            "description": "The accepted resource roles (e.g. slave_public). By default, this will deploy to any agents with the * role.",
-            "type": "string",
-            "default": "*"
         }
       },
       "required": [
         "framework-name",
         "dns-suffix",
-        "port",
         "cpus",
         "mem",
         "zookeeper",
         "mesos-master",
-        "max-heap",
-        "role"
+        "max-heap"
       ]
     }
   },

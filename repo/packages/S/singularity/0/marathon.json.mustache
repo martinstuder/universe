@@ -1,35 +1,34 @@
 {
   "id": "{{singularity.framework-name}}",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "{{resource.assets.container.docker.singularity}}",
+      "network": "HOST"
+    }
+  },
+  "env": {
+    "SINGULARITY_HOSTNAME": "{{singularity.framework-name}}{{singularity.dns-suffix}}",
+    "SINGULARITY_MAX_HEAP": "{{singularity.max-heap}}",
+    "SINGULARITY_MESOS_MASTER": "{{singularity.mesos-master}}",
+    "SINGULARITY_ZK": "{{singularity.zookeeper}}",
+    "SINGULARITY_ZK_NAMESPACE": "{{singularity.framework-name}}",
+    "SINGULARITY_URI_BASE": "http://m1.dcos/service/{{singularity.framework-name}}/singularity",
+    "LOAD_BALANCER_URI": ""
+  },
+  "ports": [0],
   "cpus": {{singularity.cpus}},
   "mem": {{singularity.mem}},
+  "cmd": "SINGULARITY_PORT=$PORT0 /etc/singularity/start.sh server /etc/singularity/singularity.yaml",
   "instances": 1,
-  "env": {
-      "SINGULARITY_HOSTNAME": "{{singularity.framework-name}}{{singularity.dns-suffix}}",
-      "SINGULARITY_PORT": "{{singularity.port}}",
-      "SINGULARITY_MAX_HEAP": "{{singularity.max-heap}}",
-      "SINGULARITY_MESOS_MASTER": "{{singularity.mesos-master}}",
-      "SINGULARITY_ZK": "{{singularity.zookeeper}}",
-      "SINGULARITY_ZK_NAMESPACE": "{{singularity.framework-name}}",
-      "SINGULARITY_URI_BASE": "http://m1.dcos/service/{{singularity.framework-name}}/singularity",
-      "LOAD_BALANCER_URI": ""
-  },
-  "requirePorts": true,
-  "portDefinitions": [
-    {
-      "port": {{singularity.port}},
-      "protocol": "tcp",
-      "name": "api"
-    }
-  ],
-  "container": {
-       "type": "DOCKER",
-       "docker": {
-           "image": "{{resource.assets.container.docker.singularity}}",
-           "network": "HOST"
-       }
-   },
-   "acceptedResourceRoles": [ "{{singularity.role}}" ],
-   "healthChecks": [],
+  "healthChecks": [{
+    "protocol": "TCP",
+    "gracePeriodSeconds": 300,
+    "intervalSeconds": 60,
+    "portIndex": 0,
+    "timeoutSeconds": 15,
+    "maxConsecutiveFailures": 3
+  }],
   "labels": {
     "DCOS_SERVICE_NAME": "{{singularity.framework-name}}",
     "DCOS_SERVICE_SCHEME": "http",
