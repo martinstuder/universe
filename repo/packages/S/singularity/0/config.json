@@ -5,6 +5,11 @@
       "description": "Singularity framework configuration properties",
       "type": "object",
       "properties": {
+        "dcos-url": {
+          "description": "The (public) DC/OS cluster base URL. Corresponds to the dcos config property 'core.dcos_url'.",
+          "type": "string",
+          "pattern": "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
+        },
         "framework-name": {
           "description": "The framework name to register with Mesos.",
           "type": "string",
@@ -45,6 +50,7 @@
         }
       },
       "required": [
+        "dcos-url",
         "framework-name",
         "dns-suffix",
         "cpus",

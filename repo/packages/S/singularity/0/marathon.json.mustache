@@ -13,7 +13,7 @@
     "SINGULARITY_MESOS_MASTER": "{{singularity.mesos-master}}",
     "SINGULARITY_ZK": "{{singularity.zookeeper}}",
     "SINGULARITY_ZK_NAMESPACE": "{{singularity.framework-name}}",
-    "SINGULARITY_URI_BASE": "http://m1.dcos/service/{{singularity.framework-name}}/singularity",
+    "SINGULARITY_URI_BASE": "{{singularity.dcos-url}}/service/{{singularity.framework-name}}/singularity",
     "LOAD_BALANCER_URI": ""
   },
   "ports": [0],
@@ -22,11 +22,12 @@
   "cmd": "SINGULARITY_PORT=$PORT0 /etc/singularity/start.sh server /etc/singularity/singularity.yaml",
   "instances": 1,
   "healthChecks": [{
-    "protocol": "TCP",
+    "path": "/singularity/api/state",
+    "portIndex": 0,
+    "protocol": "HTTP",
     "gracePeriodSeconds": 300,
     "intervalSeconds": 60,
-    "portIndex": 0,
-    "timeoutSeconds": 15,
+    "timeoutSeconds": 20,
     "maxConsecutiveFailures": 3
   }],
   "labels": {
